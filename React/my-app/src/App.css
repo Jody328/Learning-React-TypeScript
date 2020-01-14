@@ -11,6 +11,7 @@
 .details {
   font-size: larger;
   justify-content: center;
+  display: block;
 }
 
 .App-logo {
