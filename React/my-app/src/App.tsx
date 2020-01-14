@@ -7,8 +7,9 @@ const App: React.FC = () => {
     <div>
       <header>
         <p>Welcome, {name}</p>
-
-        <label>{date === undefined ? "Date Time Label" : date} </label>
+        <label className="Label">
+          {date === undefined ? "Date Time Label" : date}
+        </label>
       </header>
       <details>
         Name: <input type="text" onChange={e => setName(e.target.value)} />
@@ -20,8 +21,7 @@ const App: React.FC = () => {
           }}
           className="button"
         >
-          {" "}
-          Click
+          DateTime
         </button>
       </details>
       <footer></footer>

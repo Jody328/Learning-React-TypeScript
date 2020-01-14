@@ -8,6 +8,11 @@
   margin-left: 5px;
 }
 
+.Label {
+  float: right;
+  margin-top: -42px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
