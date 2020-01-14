@@ -5,13 +5,13 @@ const App: React.FC = () => {
   const [date, setDate] = React.useState("");
   return (
     <div>
-      <header>
+      <header className="App-header">
         <p>Welcome, {name}</p>
         <label className="Label">
           {date === undefined ? "Date Time Label" : date}
         </label>
       </header>
-      <details>
+      <details className="details">
         Name: <input type="text" onChange={e => setName(e.target.value)} />
         <button
           type="button"
