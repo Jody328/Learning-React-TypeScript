@@ -1,10 +1,8 @@
-const todoApi = (function() {
+export const todoApi = (function() {
   if (!localStorage.getItem("todos")) {
     localStorage.setItem("todos", "{}");
   }
-
   let todos = JSON.parse(localStorage.getItem("todos"));
-
   return {
     all() {
       return Promise.resolve(Object.values(todos));
@@ -23,14 +21,11 @@ const todoApi = (function() {
         })
       );
     },
-    create(todo) {
+    create(user_todo) {
       return new Promise((resolve, reject) => {
         try {
           const id = Math.floor(new Date().valueOf() * Math.random());
-          todos[id] = {
-            ...todo,
-            id
-          };
+          todos[id] = user_todo;
           localStorage.setItem("todos", JSON.stringify(todos));
           return resolve(id);
         } catch (e) {
@@ -57,13 +52,11 @@ const todoApi = (function() {
             if (id === todoId) {
               return without;
             }
-
             return {
               ...without,
               [todoId]: todos[todoId]
             };
           }, {});
-
           localStorage.setItem("todos", JSON.stringify(todos));
           return resolve();
         } catch (e) {

@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.css";
-import "./components/api.js";
-
+import { todoApi } from "./components/api.js";
 const App: React.FC = () => {
   const [name, setName] = React.useState("");
   const [date, setDate] = React.useState("");
-  const [data, setTodo] = React.useState("");
+  const [todo, setTodo] = React.useState("");
   return (
     <div>
       <header className="App-header">
@@ -36,14 +35,13 @@ const App: React.FC = () => {
         <input
           type="text"
           placeholder="Enter new Todo"
-          value={data}
+          value={todo}
           onChange={e => setTodo(e.target.value)}
         />
         <button
           type="submit"
-          onSubmit={() => {
-            setTodo(data);
-            todoApi.create(data.trimEnd());
+          onClick={() => {
+            todoApi.create(todo);
           }}
         >
           Add TODO
@@ -53,5 +51,4 @@ const App: React.FC = () => {
     </div>
   );
 };
-
 export default App;
