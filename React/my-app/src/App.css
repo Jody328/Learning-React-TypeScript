@@ -10,8 +10,9 @@
 
 .details {
   font-size: larger;
-  justify-content: center;
-  display: block;
+  text-align: center;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .App-logo {

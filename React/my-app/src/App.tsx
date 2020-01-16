@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import "./components/api.js";
+import { genericApi } from "./components/api";
+import { TodoList } from "./components/TodoList";
+import { NewTodo } from "./components/newTodo";
+
+type todoType = {
+  id: number;
+  value: string;
+};
+
+const genericTodos = genericApi<todoType>("todos");
 
 const App: React.FC = () => {
   const [name, setName] = React.useState("");
   const [date, setDate] = React.useState("");
-  const [data, setTodo] = React.useState("");
+  const [todos, setTodos] = React.useState<todoType[]>([]);
+
+  useEffect(() => {
+    genericTodos.all().then(items => {
+      setTodos(items);
+    });
+  }, []);
+
   return (
     <div>
       <header className="App-header">
@@ -14,7 +30,7 @@ const App: React.FC = () => {
           {date === undefined ? "Date Time Label" : date}
         </label>
       </header>
-      <details className="details">
+      <div className="details">
         Name:{" "}
         <input
           type="text"
@@ -31,27 +47,11 @@ const App: React.FC = () => {
         >
           DateTime
         </button>
-        <br></br>
-        TODO:{" "}
-        <input
-          type="text"
-          placeholder="Enter new Todo"
-          value={data}
-          onChange={e => setTodo(e.target.value)}
-        />
-        <button
-          type="submit"
-          onSubmit={() => {
-            setTodo(data);
-            todoApi.create(data.trimEnd());
-          }}
-        >
-          Add TODO
-        </button>
-      </details>
+        <NewTodo />
+        <TodoList todos={todos} />
+      </div>
       <footer></footer>
     </div>
   );
 };
-
 export default App;
